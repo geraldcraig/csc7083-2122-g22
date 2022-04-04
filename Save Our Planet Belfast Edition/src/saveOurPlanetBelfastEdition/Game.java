@@ -32,9 +32,10 @@ public class Game {
 
 			System.out.println("Enter your name");
 			String playerName = sc.nextLine();
-			Player player = new Player(playerName);
-			player.setPlayerName(playerName);
-			players = players + 1;
+			//LC. Commenting out for now as i'm adding the marker to the player constructor and it's broken the below code
+			//Player player = new Player(playerName);
+			//player.setPlayerName(playerName);
+			//players = players + 1;
 		}
 
 	}

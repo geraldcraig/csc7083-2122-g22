@@ -11,7 +11,7 @@ public class Player {
 	 */
 
 	private String playerName = "";
-	//private Marker marker = null;
+	private Marker marker = null;
 	//private int playerPosition = 0;
 
 	//==================================================
@@ -20,10 +20,10 @@ public class Player {
 	/**
 	 *constructs player using playerName, marker and playerPosition
 	 */
-	public Player(String playerName) {
+	public Player(String playerName, Marker marker) {
 
 		this.playerName = playerName;
-		//this.marker = marker;
+		this.marker = marker;
 		//this.playerPosition = playerPosition;
 
 	}
@@ -34,7 +34,7 @@ public class Player {
 	/**
 	 * returns playerName
 	 */
-	private String getPlayerName() {
+	public String getPlayerName() {
 		return playerName;
 	}
 
@@ -49,9 +49,9 @@ public class Player {
 		this.playerName = playerName;
 	}
 
-	//private Marker getMarker() {
-	//return marker;
-	//}
+	public Marker getMarker() {
+		return marker;
+	}
 
 	//private int getPlayerPostion() {
 	//return playerPosition;
