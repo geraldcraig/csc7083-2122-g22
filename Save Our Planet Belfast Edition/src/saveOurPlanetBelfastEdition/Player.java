@@ -5,11 +5,7 @@ public class Player {
 	
 	
 	
-	/**
-	 * Only playerName is valid for now for testing as board is not currently 
-	 * made so cant get index and im unsure of how to add an Enum to an object so cant add marker yet
-	 */
-
+	
 	private String playerName = "";
 	private Marker marker = null;
 	//private int playerPosition = 0;
