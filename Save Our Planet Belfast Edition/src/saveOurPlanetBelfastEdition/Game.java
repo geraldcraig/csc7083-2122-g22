@@ -3,17 +3,25 @@ package saveOurPlanetBelfastEdition;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import board.Board;
+import board.BoardSetup;
+
 public class Game {
 	
 	
 	
 	public static void main(String[] args) {
 		
-		ArrayList<Player> gamePlayers = new ArrayList<Player>();
+		Board board = BoardSetup.getNewBoard();
 		
-		validateNumPlayers();
-		String numPlayers = "2";
-		addPlayer(numPlayers);
+		System.out.println(board);
+
+		
+		/*
+		 * ArrayList<Player> gamePlayers = new ArrayList<Player>();
+		 * 
+		 * validateNumPlayers(); String numPlayers = "2"; addPlayer(numPlayers);
+		 */
 
 	}
 
