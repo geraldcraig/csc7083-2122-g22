@@ -2,12 +2,13 @@ package saveOurPlanetBelfastEdition;
 
 public class Player {
 	
-	
-	
-	
-	
-	private String playerName = "";
-	private Marker marker = null;
+	/**
+	 * Only playerName is valid for now for testing as board is not currently 
+	 * made so can't get index
+	 */
+
+	private String playerName;
+	private Marker marker;
 	//private int playerPosition = 0;
 
 	//==================================================
@@ -33,17 +34,13 @@ public class Player {
 	public String getPlayerName() {
 		return playerName;
 	}
-
-
+	
 	//==================================================
-	//================::Set Player Name::===============
+	//================::Get Player Marker::===============
 	//==================================================
 	/**
-	 * @param playerName the playerName to set
+	 * returns playerName
 	 */
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
 
 	public Marker getMarker() {
 		return marker;
