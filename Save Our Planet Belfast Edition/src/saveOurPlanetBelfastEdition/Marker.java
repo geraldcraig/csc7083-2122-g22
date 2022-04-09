@@ -5,11 +5,26 @@ package saveOurPlanetBelfastEdition;
 //===================::Marker::=====================
 //==================================================
 /**
- *creates an enum Marker with the vaules WINDMILL, ELECTRIC_CAR, MICROSCOPE, SOLAR_PANEL
- *player will select a marker which will move around the board and represent the player
- */
+*Creates an enum Marker with the values WINDMILL, ELECTRIC_CAR, MICROSCOPE, SOLAR_PANEL
+*Player will select a marker which will move around the board and represent the player
+*/
 public enum Marker {
 	
-	WINDMILL, ELECTRIC_CAR, MICROSCOPE, SOLAR_PANEL
+	WINDMILL("Windmill"), 
+	
+	ELECTRIC_CAR("Electric Car"), 
+	
+	MICROSCOPE("Microscope"), 
+	
+	SOLAR_PANEL("Solar Panel");
 
+	private String title;
+	
+	public String getTitle() {
+		return this.title;
+	}
+	
+	private Marker(String title) {
+		this.title = title;
+	}
 }
