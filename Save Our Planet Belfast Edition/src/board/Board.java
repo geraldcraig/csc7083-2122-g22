@@ -61,10 +61,12 @@ public class Board {
 		return "Board [boardLocations=" + boardLocations + "]";
 	}
 
-	
-
-	
-	
-	
+	//Method to print the name of the areas in the board and their relative position within the board
+	public void printBoard() {
+		
+		for (Integer key : boardLocations.keySet()) {
+			System.out.println("Board Position: "+key + ": " + "Board Position Name: "+boardLocations.get(key).getAreaName());
+		}
+	}
 
 }

@@ -19,16 +19,19 @@ public class Game {
 		
 		ArrayList<Player> gamePlayers = new ArrayList<Player>();
 		
-		//Board board = BoardSetup.getNewBoard();
+		//Create the board that will be used by the players for the game
+		Board board = BoardSetup.getNewBoard();
 		
-		//System.out.println(board);
+		//Call the board classes method to print the contents of the board to the console
+		board.printBoard();
+		System.out.println();
 	
 		//Get and store the number of game players
 		int numberOfPlayers = validateNumPlayers();
 
 		//Add players to the game
 		addPlayer(numberOfPlayers, gamePlayers);
-		System.out.println("All "+gamePlayers.size()+" players have been successfully created");
+		System.out.println("All "+gamePlayers.size()+" players have been successfully created!");
 
 	}
 
