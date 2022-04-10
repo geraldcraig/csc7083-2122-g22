@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Scanner;
-
 import board.Board;
 import board.BoardSetup;
 
@@ -22,6 +20,9 @@ public class Game {
 		//Create the board that will be used by the players for the game
 		Board board = BoardSetup.getNewBoard();
 		
+		//Create dice to be used by the players for the game
+		Dice[] dice = Dice.generateDice();
+		
 		//Call the board classes method to print the contents of the board to the console
 		board.printBoard();
 		System.out.println();
@@ -32,6 +33,19 @@ public class Game {
 		//Add players to the game
 		addPlayer(numberOfPlayers, gamePlayers);
 		System.out.println("All "+gamePlayers.size()+" players have been successfully created!");
+		
+		//loop to display result of rolling dice
+		//can be updated to work with player make move
+		while(true) {
+			for(Player player : gamePlayers) {
+				System.out.println(player.getPlayerName() + "'s go, rolling dice now");
+				Dice.rollDice(dice);
+				int rolledValue = Dice.sumDice(dice);
+				System.out.println(player.getPlayerName() + " rolled " + rolledValue);
+			}
+			
+			break;
+		}
 
 	}
 

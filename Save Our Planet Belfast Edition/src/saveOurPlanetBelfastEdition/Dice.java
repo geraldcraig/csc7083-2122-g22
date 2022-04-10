@@ -112,7 +112,7 @@ public class Dice {
 	 */
 	public static Dice[] generateDice() {
 		
-		Dice [] dice = new Dice[2];  //creates a dice array with 2 dice references
+		Dice[] dice = new Dice[2];  //creates a dice array with 2 dice references
 		for (int i=0; i<dice.length; i++) { //Iterates through array and initialises the dice objects
 		dice[i] = new Dice();
 		}
@@ -126,7 +126,7 @@ public class Dice {
 	 * creates an integer array and fill it with 2 random values from 1 to NUM_OF_SIDES
 	 * @return int [] of 2 random values, 1-NUM_OF_SIDES
 	 */
-	public static void rollDice(Dice [] dice) {
+	public static void rollDice(Dice[] dice) {
 		for (int i=0; i<dice.length; i++) {
 			dice[i].rollDice();
 		}
@@ -140,7 +140,7 @@ public class Dice {
 	 * @param dice is a integer array full of numbers to be summed
 	 * @return
 	 */
-	public static int sumDice(Dice [] dice) {
+	public static int sumDice(Dice[] dice) {
 		
 		int sum=0; 
 		for (int i=0; i<dice.length; i++) {
@@ -158,7 +158,7 @@ public class Dice {
 	 * prints all values in the dice array
 	 * @param dice is a integer array full of numbers to be printed
 	 */
-	public static void printDice(Dice [] dice) {
+	public static void printDice(Dice[] dice) {
 		
 		System.out.print("You have rolled: ");
 		for (Dice d: dice) {

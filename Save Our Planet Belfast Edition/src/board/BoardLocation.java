@@ -41,6 +41,7 @@ public int getIndex() {
 public String getAreaName() {
 	return areaName;
 }
-	
+
+
 	
 }
