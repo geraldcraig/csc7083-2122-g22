@@ -17,6 +17,9 @@ public class Game {
 		
 		ArrayList<Player> gamePlayers = new ArrayList<Player>();
 		
+		//Object to handle communication with players
+		userInput userInput = new userInput();
+		
 		//Create the board that will be used by the players for the game
 		Board board = BoardSetup.getNewBoard();
 		
@@ -31,24 +34,79 @@ public class Game {
 		int numberOfPlayers = validateNumPlayers();
 
 		//Add players to the game
-		addPlayer(numberOfPlayers, gamePlayers);
-		System.out.println("All "+gamePlayers.size()+" players have been successfully created!");
+		addPlayer(numberOfPlayers, gamePlayers, userInput);
+		System.out.printf("%nAll %d players have been successfully created!%n", gamePlayers.size());
 		
-		//loop to display result of rolling dice
-		//can be updated to work with player make move
-		while(true) {
-			for(Player player : gamePlayers) {
-				System.out.println(player.getPlayerName() + "'s go, rolling dice now");
-				Dice.rollDice(dice);
-				int rolledValue = Dice.sumDice(dice);
-				System.out.println(player.getPlayerName() + " rolled " + rolledValue);
-			}
+		//Players move around the board
+		
+		//Display the current position of each player on the board
+		printPlayerBoardPositions(gamePlayers, board);
+
+		do {
 			
-			break;
+			for (int i = 0; i < gamePlayers.size(); i++) {
+				
+				
+				//Ask the player whose turn it is if they would like to continue playing the game.
+				System.out.printf("%nWould player %d %s like to continue playing?%n", i, gamePlayers.get(i).getPlayerName());
+				
+				System.out.printf("%nPlease enter Yes or No%n");
+				
+				//TO DO: SHOULD HANDLE UNEXPECTED USER INPUT. ALSO NEED TO HANDLE UNEXPECTED INPUT WHEN SELECTING NAME OR MARKER, I.E USER ENTERS INT WHEN STRING IS EXPECTED
+		
+				//If yes then execute the current players turn
+				if (userInput.contintuePlaying().equalsIgnoreCase("Yes")) {
+					
+					System.out.printf("%n%s's go, rolling dice now!%n", gamePlayers.get(i).getPlayerName());
+				
+					Dice.rollDice(dice);
+				
+					int rolledValue = Dice.sumDice(dice);
+				
+					System.out.printf("%n%s rolled %d%n", gamePlayers.get(i).getPlayerName(), rolledValue);
+				
+					//Set the player's new position on the board
+					gamePlayers.get(i).setBoardPosition(board.getNewPlayerBoardPosition(gamePlayers.get(i).getBoardPosition(), rolledValue));
+				
+					//Print out the players new position
+					printPlayerBoardPosition(gamePlayers.get(i), board);
+					
+				//If user chooses not to continue playing then remove the player from the list of players
+				} else {
+					
+					gamePlayers.remove(gamePlayers.get(i));
+					//TO DO: WOULD BE NICE IF I COULD REFERENCE THE NAME OF THE PLAYER WHO HAS JUST BEEN REMOVED
+					System.out.printf("%nYou have been successfully removed from the game%n");
+				}
+					
+			}
+			//If no players remain then the game ends	
+			} while (!gamePlayers.isEmpty());
+
+			System.out.printf("%nAll players have left the game.%n");
+			
+		}		
+		
+	private static void printPlayerBoardPosition(Player player, Board board) {
+		
+		System.out.printf("%n%s is now currently on square: %d '%s'.%n", player.getPlayerName(), player.getBoardPosition(), board.getLocation(player.getBoardPosition()));
+		
+	}
+	
+
+	//This method prints the current position of each player on the board
+	private static void printPlayerBoardPositions(ArrayList<Player> gamePlayers, Board board) {
+		
+		for (Player player : gamePlayers) {
+
+			System.out.printf("%n%s is currently on square: %d '%s'.%n", player.getPlayerName(), player.getBoardPosition(), board.getLocation(player.getBoardPosition()));
+
 		}
 
-	}
-
+	}		
+			
+			
+		
 	//==================================================
 	//===============::Add Player::=====================
 	//==================================================
@@ -57,33 +115,36 @@ public class Game {
 	 * amount of players permitted must be within the MIN_PLAYERS & MAX_PLAYERS limits. Player names must be unique. Each game
 	 * player is asked to select a game marker and each game marker must be unique per player.
 	 */
-	public static void addPlayer(int numberOfPlayers, ArrayList<Player> gamePlayers) {
+	public static void addPlayer(int numberOfPlayers, ArrayList<Player> gamePlayers, userInput userInput) {
 		
 		
 		for (int i = 0; i < numberOfPlayers; i++) {
 		
 			boolean nameTaken = false;
-			Scanner sc = new Scanner(System.in);
+
 			String playerName;
 			
 			do {
 			
 				nameTaken = false;
-				System.out.println("Please enter your player name");
-				playerName = sc.next();
+				
+				System.out.printf("%nPlease enter your player name.%n");
+
+				playerName = userInput.getPlayerName();
 				
 				for (Player player : gamePlayers) {
 
 					if (player.getPlayerName().equalsIgnoreCase(playerName)) {
-						System.out.println();
-						System.out.println("Sorry that name is already taken.");
-						System.out.println();
-						nameTaken = true;	
+						
+						System.out.printf("%nSorry that name is already taken.%n");
+						
+						nameTaken = true;
+							
 					}
 
 				}
 				
-			} while (nameTaken == true);
+			} while (nameTaken);
 			
 			//Create marker and call method which validates the users selection and returns the selected marker
 			Marker marker = selectMarker(gamePlayers);
@@ -95,8 +156,7 @@ public class Game {
 			gamePlayers.add(player);
 			
 			//Inform user that the player has been successfully created
-			System.out.println("Currently "+gamePlayers.size()+" players created");
-			System.out.println();
+			System.out.printf("%nCurrently %d player(s) created.%n", gamePlayers.size());
 
 		}
 		
