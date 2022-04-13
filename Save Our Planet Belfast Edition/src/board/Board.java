@@ -20,12 +20,12 @@ public class Board {
 	 * @param index
 	 * @return index
 	 */
-	public BoardLocation getLocation(int index) {
+
+	public String getLocation(int index) {
 		if (!boardLocations.containsKey(index)) {
 			System.out.println("Cannot access location with insex " + index + " on board!");
 		}
-
-		return boardLocations.get(index);
+		return boardLocations.get(index).getAreaName();
 	}
 	
 	/**
@@ -54,6 +54,31 @@ public class Board {
 		//else return null
 		return null;
 		
+	}
+	
+	/**
+	 * returns the new position on the board for a player given the players supplied current board position and rolled dice value
+	 * @param areaName
+	 * @return location name
+	 */
+	public int getNewPlayerBoardPosition(int currentBoardPosition, int diceValue) {
+		
+		int gameAreas = boardLocations.size();
+		int playerPosition = currentBoardPosition+diceValue;
+		int newPlayerBoardPosition;
+		
+		if (playerPosition<gameAreas) {
+		
+			newPlayerBoardPosition = playerPosition;
+		
+		} else {
+
+			newPlayerBoardPosition = (playerPosition-gameAreas);
+		
+		}
+		
+		return newPlayerBoardPosition;
+	
 	}
 
 	@Override

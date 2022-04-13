@@ -9,7 +9,7 @@ public class Player {
 
 	private String playerName;
 	private Marker marker;
-	//private int playerPosition = 0;
+	private int boardPosition;
 
 	//==================================================
 	//==============::Player Constructor::==============
@@ -21,7 +21,7 @@ public class Player {
 
 		this.playerName = playerName;
 		this.marker = marker;
-		//this.playerPosition = playerPosition;
+		this.boardPosition = 0;
 
 	}
 
@@ -39,16 +39,32 @@ public class Player {
 	//================::Get Player Marker::===============
 	//==================================================
 	/**
-	 * returns playerName
+	 * returns playerMarker
 	 */
 
 	public Marker getMarker() {
 		return marker;
 	}
 
-	//private int getPlayerPostion() {
-	//return playerPosition;
-	//}
+	//============================================================
+	//================::Get Player Board Position::===============
+	//============================================================
+	/**
+	 * returns the index of the players board position
+	 */
+	public int getBoardPosition() {
+	return boardPosition;
+	}
+	
+	//============================================================
+	//================::Set Player Board Position::===============
+	//============================================================
+	/**
+	 * Sets the players board position based on the supplied board index
+	 */
+	public void setBoardPosition(int boardPosition) {
+	this.boardPosition = boardPosition;
+	}
 
 	//==================================================
 	//=================::Name ToString::================
