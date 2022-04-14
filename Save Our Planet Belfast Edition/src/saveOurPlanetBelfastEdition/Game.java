@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Iterator;
+
 import board.Board;
 import board.BoardSetup;
 
-
 public class Game {
-	
+
 	private static final int MIN_PLAYERS = 2;
 	private static final int MAX_PLAYERS = 4;
 
@@ -20,7 +21,7 @@ public class Game {
 		//Object to handle communication with players
 		userInput userInput = new userInput();
 		
-		//Create the board that will be used by the players for the game
+		//Create the board that will be used by t3he players for the game
 		Board board = BoardSetup.getNewBoard();
 		
 		//Create dice to be used by the players for the game
@@ -44,11 +45,14 @@ public class Game {
 
 		do {
 			
-			for (int i = 0; i < gamePlayers.size(); i++) {
+			Iterator<Player> iteration = gamePlayers.iterator();
+			
+			while (iteration.hasNext()) {
 				
+				Player player = iteration.next();
 				
 				//Ask the player whose turn it is if they would like to continue playing the game.
-				System.out.printf("%nWould player %d %s like to continue playing?%n", i, gamePlayers.get(i).getPlayerName());
+				System.out.printf("%nWould player %d %s like to continue playing?%n", gamePlayers.indexOf(player) , player.getPlayerName());
 				
 				System.out.printf("%nPlease enter Yes or No%n");
 				
@@ -57,29 +61,107 @@ public class Game {
 				//If yes then execute the current players turn
 				if (userInput.contintuePlaying().equalsIgnoreCase("Yes")) {
 					
-					System.out.printf("%n%s's go, rolling dice now!%n", gamePlayers.get(i).getPlayerName());
+					System.out.printf("%n%s's go, rolling dice now!%n", player.getPlayerName());
 				
 					Dice.rollDice(dice);
 				
 					int rolledValue = Dice.sumDice(dice);
 				
-					System.out.printf("%n%s rolled %d%n", gamePlayers.get(i).getPlayerName(), rolledValue);
+					System.out.printf("%n%s rolled %d%n", player.getPlayerName(), rolledValue);
 				
 					//Set the player's new position on the board
-					gamePlayers.get(i).setBoardPosition(board.getNewPlayerBoardPosition(gamePlayers.get(i).getBoardPosition(), rolledValue));
+					player.setBoardPosition(board.getNewPlayerBoardPosition(player.getBoardPosition(), rolledValue));
 				
 					//Print out the players new position
-					printPlayerBoardPosition(gamePlayers.get(i), board);
+					printPlayerBoardPosition(player, board);
 					
 				//If user chooses not to continue playing then remove the player from the list of players
 				} else {
 					
-					gamePlayers.remove(gamePlayers.get(i));
+					iteration.remove();
+					
 					//TO DO: WOULD BE NICE IF I COULD REFERENCE THE NAME OF THE PLAYER WHO HAS JUST BEEN REMOVED
 					System.out.printf("%nYou have been successfully removed from the game%n");
 				}
-					
+				
+				
+				
+				
+				
 			}
+//			for (Player player : gamePlayers) {
+//				
+//				//Ask the player whose turn it is if they would like to continue playing the game.
+//				System.out.printf("%nWould player %d %s like to continue playing?%n", gamePlayers.indexOf(player), player.getPlayerName());
+//				
+//				System.out.printf("%nPlease enter Yes or No%n");
+//				
+//				//TO DO: SHOULD HANDLE UNEXPECTED USER INPUT. ALSO NEED TO HANDLE UNEXPECTED INPUT WHEN SELECTING NAME OR MARKER, I.E USER ENTERS INT WHEN STRING IS EXPECTED
+//		
+//				//If yes then execute the current players turn
+//				if (userInput.contintuePlaying().equalsIgnoreCase("Yes")) {
+//					
+//					System.out.printf("%n%s's go, rolling dice now!%n", player.getPlayerName());
+//				
+//					Dice.rollDice(dice);
+//				
+//					int rolledValue = Dice.sumDice(dice);
+//				
+//					System.out.printf("%n%s rolled %d%n", player.getPlayerName(), rolledValue);
+//				
+//					//Set the player's new position on the board
+//					player.setBoardPosition(board.getNewPlayerBoardPosition(player.getBoardPosition(), rolledValue));
+//				
+//					//Print out the players new position
+//					printPlayerBoardPosition(player, board);
+//					
+//				//If user chooses not to continue playing then remove the player from the list of players
+//				} else {
+//					
+//					gamePlayers.remove(player);
+//					
+//					//TO DO: WOULD BE NICE IF I COULD REFERENCE THE NAME OF THE PLAYER WHO HAS JUST BEEN REMOVED
+//					System.out.printf("%nYou have been successfully removed from the game%n");
+//				}
+//			}
+			
+//			for (int i = 0; i < gamePlayers.size(); i++) {
+//				
+//				
+//				//Ask the player whose turn it is if they would like to continue playing the game.
+//				System.out.printf("%nWould player %d %s like to continue playing?%n", i, gamePlayers.get(i).getPlayerName());
+//				
+//				System.out.printf("%nPlease enter Yes or No%n");
+//				
+//				//TO DO: SHOULD HANDLE UNEXPECTED USER INPUT. ALSO NEED TO HANDLE UNEXPECTED INPUT WHEN SELECTING NAME OR MARKER, I.E USER ENTERS INT WHEN STRING IS EXPECTED
+//		
+//				//If yes then execute the current players turn
+//				if (userInput.contintuePlaying().equalsIgnoreCase("Yes")) {
+//					
+//					System.out.printf("%n%s's go, rolling dice now!%n", gamePlayers.get(i).getPlayerName());
+//				
+//					Dice.rollDice(dice);
+//				
+//					int rolledValue = Dice.sumDice(dice);
+//				
+//					System.out.printf("%n%s rolled %d%n", gamePlayers.get(i).getPlayerName(), rolledValue);
+//				
+//					//Set the player's new position on the board
+//					gamePlayers.get(i).setBoardPosition(board.getNewPlayerBoardPosition(gamePlayers.get(i).getBoardPosition(), rolledValue));
+//				
+//					//Print out the players new position
+//					printPlayerBoardPosition(gamePlayers.get(i), board);
+//					
+//				//If user chooses not to continue playing then remove the player from the list of players
+//				} else {
+//					
+//					gamePlayers.remove(gamePlayers.get(i));
+//					
+//					//TO DO: WOULD BE NICE IF I COULD REFERENCE THE NAME OF THE PLAYER WHO HAS JUST BEEN REMOVED
+//					System.out.printf("%nYou have been successfully removed from the game%n");
+//				}
+//					
+//			}
 			//If no players remain then the game ends	
 			} while (!gamePlayers.isEmpty());
 
