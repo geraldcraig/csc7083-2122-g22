@@ -9,7 +9,7 @@ import java.util.Iterator;
 import board.Board;
 import board.BoardSetup;
 
-public class Game {
+public class testdriver {
 
 	private static final int MIN_PLAYERS = 2;
 	private static final int MAX_PLAYERS = 4;
