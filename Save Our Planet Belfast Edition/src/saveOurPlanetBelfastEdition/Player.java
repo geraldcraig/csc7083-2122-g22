@@ -1,5 +1,7 @@
 package saveOurPlanetBelfastEdition;
 
+import java.util.ArrayList;
+
 public class Player {
 	
 	/**
@@ -10,6 +12,9 @@ public class Player {
 	private String playerName;
 	private Marker marker;
 	private int boardPosition;
+	private double playerFunds;
+	private ArrayList<Integer> ownedAreas = new ArrayList<Integer>();
+	
 
 	//==================================================
 	//==============::Player Constructor::==============
@@ -22,6 +27,7 @@ public class Player {
 		this.playerName = playerName;
 		this.marker = marker;
 		this.boardPosition = 0;
+		this.playerFunds = 300;
 
 	}
 
@@ -65,6 +71,32 @@ public class Player {
 	public void setBoardPosition(int boardPosition) {
 	this.boardPosition = boardPosition;
 	}
+	
+	public void updatePlayerFundsAdd(double playerFunds) {
+		this.playerFunds += playerFunds;
+	}
+	
+	public void updatePlayerFundsSubtract(double playerFunds) {
+		this.playerFunds -= playerFunds;
+	}
+
+	/**
+	 * 
+	 * @return playerFunds
+	 */
+	public double getPlayerFunds() {
+		return playerFunds;
+	}
+	
+	public ArrayList<Integer> getOwnedAreas() {
+		return ownedAreas;
+		
+	}
+	
+	public void updateOwnedAreas(int areaIndex) {
+		this.ownedAreas.add(areaIndex);
+	}
+
 
 	//==================================================
 	//=================::Name ToString::================

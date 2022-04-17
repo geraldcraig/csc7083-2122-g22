@@ -19,7 +19,7 @@ public class Game {
 		ArrayList<Player> gamePlayers = new ArrayList<Player>();
 		
 		//Object to handle communication with players
-		userInput userInput = new userInput();
+		UserInput userInput = new UserInput();
 		
 		//Create the board that will be used by t3he players for the game
 		Board board = BoardSetup.getNewBoard();
@@ -59,7 +59,7 @@ public class Game {
 				//TO DO: SHOULD HANDLE UNEXPECTED USER INPUT. ALSO NEED TO HANDLE UNEXPECTED INPUT WHEN SELECTING NAME OR MARKER, I.E USER ENTERS INT WHEN STRING IS EXPECTED
 		
 				//If yes then execute the current players turn
-				if (userInput.contintuePlaying().equalsIgnoreCase("Yes")) {
+				if (userInput.continuePlaying().equalsIgnoreCase("Yes")) {
 					
 					System.out.printf("%n%s's go, rolling dice now!%n", player.getPlayerName());
 				
@@ -197,7 +197,7 @@ public class Game {
 	 * amount of players permitted must be within the MIN_PLAYERS & MAX_PLAYERS limits. Player names must be unique. Each game
 	 * player is asked to select a game marker and each game marker must be unique per player.
 	 */
-	public static void addPlayer(int numberOfPlayers, ArrayList<Player> gamePlayers, userInput userInput) {
+	public static void addPlayer(int numberOfPlayers, ArrayList<Player> gamePlayers, UserInput userInput) {
 		
 		
 		for (int i = 0; i < numberOfPlayers; i++) {

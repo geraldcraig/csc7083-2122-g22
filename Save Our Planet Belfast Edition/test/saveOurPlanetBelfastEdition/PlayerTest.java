@@ -8,28 +8,31 @@ import org.junit.jupiter.api.Test;
 class PlayerTest {
 	
 	//Test Data
-	String validName;
-	Marker marker;
-
-	@BeforeEach
-	void setUp() throws Exception {
+		String validName;
+		int validBoardPosition;
 		
-		validName = "Lee Clark";
-		marker = Marker.WINDMILL;
+
+		@BeforeEach
+		void setUp() throws Exception {
+			
+			validName = "Lee";
+			validBoardPosition = 10;	
+			
+		}
+
+		//Test case tests the instantiation of a player object
+		@Test
+		void testPlayerConstructor() {
+			Player testPlayer = new Player(validName, Marker.WINDMILL);
+			assertEquals(validName, testPlayer.getPlayerName());
+			assertEquals(Marker.WINDMILL, testPlayer.getMarker());
+		}
 		
+		@Test
+		void testPlayerBoardPosition() {
+			Player testPlayer = new Player(validName, Marker.WINDMILL);
+			testPlayer.setBoardPosition(validBoardPosition);
+			assertEquals(validBoardPosition, testPlayer.getBoardPosition());
+		}
+			
 	}
-
-	//Test case tests the instantiation of a player object
-	@Test
-	void testPlayerContructor() {
-		Player Lee = new Player(validName, marker);
-		assertEquals(validName, Lee.getPlayerName());
-		assertEquals(marker.toString(), Lee.getMarker().toString());
-	}
-	
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
-
-}
