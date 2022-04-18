@@ -2,7 +2,7 @@ package saveOurPlanetBelfastEdition;
 
 
 /**
- * The dice object calls a single dice of X sides. By default there is a base value NUM_OF_SIDES = 6 or alternatively x number of sides can be specified via the constructor. 
+ * The dice object calls a single dice of X sides. By default there is a base value NUM_OF_SIDES = 4 or alternatively x number of sides can be specified via the constructor. 
  * rolling the dice generates a random value between 1 and x number of sides 
  * @author Oisin Dorton 
  */
@@ -19,10 +19,10 @@ public class Dice {
 	//=============::Constructors::=====================
 	//==================================================
 	/**
-	 * Initialises the dice with a base values of 1 and default NUM_OF_SIDES = 6
+	 * Initialises the dice with a base values of 1 and default NUM_OF_SIDES = 4
 	 */
 	public Dice() {
-		NUM_OF_SIDES =6;
+		NUM_OF_SIDES = 4;
 		value=1;
 	}
 	

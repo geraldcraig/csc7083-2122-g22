@@ -52,22 +52,38 @@ public class Game {
 				Player player = iteration.next();
 				
 				//Ask the player whose turn it is if they would like to continue playing the game.
-				System.out.printf("%nWould player %d %s like to continue playing?%n", gamePlayers.indexOf(player) , player.getPlayerName());
+				System.out.printf("%nWould player %d %s like to continue playing?%n", gamePlayers.indexOf(player) , player.getPlayerName().toUpperCase());
 				
 				System.out.printf("%nPlease enter Yes or No%n");
 				
 				//TO DO: SHOULD HANDLE UNEXPECTED USER INPUT. ALSO NEED TO HANDLE UNEXPECTED INPUT WHEN SELECTING NAME OR MARKER, I.E USER ENTERS INT WHEN STRING IS EXPECTED
 		
 				//If yes then execute the current players turn
-				if (userInput.continuePlaying().equalsIgnoreCase("Yes")) {
+				if (userInput.continuePlaying().toLowerCase().equalsIgnoreCase("yes")) {
 					
-					System.out.printf("%n%s's go, rolling dice now!%n", player.getPlayerName());
+					System.out.printf("%n%s's go, rolling dice now!%n", player.getPlayerName().toUpperCase());
 				
 					Dice.rollDice(dice);
 				
 					int rolledValue = Dice.sumDice(dice);
 				
-					System.out.printf("%n%s rolled %d%n", player.getPlayerName(), rolledValue);
+					System.out.printf("%n%s rolled %d%n", player.getPlayerName().toUpperCase(), rolledValue);
+					
+					// checks thats players previous position was below index 11
+					if(player.getBoardPosition() < 11)  {
+						
+						// checks what it players new position will be 
+						int playerPosition = player.getBoardPosition() + rolledValue;
+						
+						// If greater than 11 (Go) then it will add 50 tokens into the players funds and inform the player of the update
+						if(playerPosition > 11) {
+						
+						player.updatePlayerFundsAdd(50);
+						System.out.println("You have passed Go and have received some tokens, you new balance is: " + player.getPlayerFunds());
+					
+
+						}
+					}
 				
 					//Set the player's new position on the board
 					player.setBoardPosition(board.getNewPlayerBoardPosition(player.getBoardPosition(), rolledValue));
@@ -75,6 +91,13 @@ public class Game {
 					//Print out the players new position
 					printPlayerBoardPosition(player, board);
 					
+					//checks player funds and if less than or equal to 0 then it removes the player from the game
+					if(player.getPlayerFunds() <= 0) {
+						iteration.remove();
+						System.out.printf("%nSorry " +player.getPlayerName().toUpperCase()+" you have exceeded your funds and went into debt, you have been removed from the game.%n");
+					}
+					
+				
 				//If user chooses not to continue playing then remove the player from the list of players
 				} else {
 					
@@ -85,7 +108,13 @@ public class Game {
 				}
 				
 				
-				
+					//checks number of players and if 1 remaining then they are declared the winner
+					if(gamePlayers.size() == 1 ) {
+						
+						System.out.println("Congratulations " + gamePlayers + " you have won the Game");
+		
+					}
+					
 				
 				
 			}
@@ -171,7 +200,7 @@ public class Game {
 		
 	private static void printPlayerBoardPosition(Player player, Board board) {
 		
-		System.out.printf("%n%s is now currently on square: %d '%s'.%n", player.getPlayerName(), player.getBoardPosition(), board.getLocation(player.getBoardPosition()));
+		System.out.printf("%n%s is now currently on square: %d '%s'.%n", player.getPlayerName().toUpperCase(), player.getBoardPosition(), board.getLocation(player.getBoardPosition()));
 		
 	}
 	
@@ -181,7 +210,7 @@ public class Game {
 		
 		for (Player player : gamePlayers) {
 
-			System.out.printf("%n%s is currently on square: %d '%s'.%n", player.getPlayerName(), player.getBoardPosition(), board.getLocation(player.getBoardPosition()));
+			System.out.printf("%n%s is currently on square: %d '%s'.%n", player.getPlayerName().toUpperCase(), player.getBoardPosition(), board.getLocation(player.getBoardPosition()));
 
 		}
 
